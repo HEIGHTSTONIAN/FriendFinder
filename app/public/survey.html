@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Friend Finder</title>
+    <!--bootstrap css -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+    <!-- bootstrap js -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>
+          Friend Finder survey
+        </h1>
+        <p>Take the survey to find your new friend.</p>
+        <hr>
+        <h3>
+            <strong>First we need a little information about you.</strong>
+        <h3>
+        <h4>
+            What's your name? (Required)
+        </h4>
+
+
+        <h3><strong>First, about ice cream...</strong></h3>
+        <h4>You love ice cream.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q0">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+        <h3><strong>Second, about playing sports...</strong></h3>
+        <h4>You love playing sports.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+        <h3><strong>Third, about video games...</strong></h3>
+        <h4>You love to play video games.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q2">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+        <h3><strong>Fourth, about new music...</strong></h3>
+        <h4>You love enjoying new music.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q3">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+        <h3><strong>Fifth, about dancing...</strong></h3>
+        <h4>You love dancing.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q4">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+         <h3><strong>Sixth, about coffee...</strong></h3>
+        <h4>You love enjoying coffee.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q5">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+         <h3><strong>Seventh, about new driving...</strong></h3>
+        <h4>You love enjoying driving.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q6">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+         <h3><strong>Eighth, about surprises...</strong></h3>
+        <h4>You love surprises.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q7">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+         <h3><strong>Ninth, about Newman...</strong></h3>
+        <h4>You love seeing Newman.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q8">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+         <h3><strong>Tenth, about dating...</strong></h3>
+        <h4>You love dating new people.</h4>
+        <p>
+            (1 = Totally Disagree, 5 = Totally Agree)
+        </p>
+        <select id="q9">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br>
+        <hr>
+        <button type="button" id='submit' class="btn btn-success btn-medium">Submit</button>
+    </div>
+</body>
+<script type="text/javascript">
+
+$('document').ready(function() {
+  $('#submit').on('click', function() {
+console.log('submitclicked');
+    var newFriend = {
+      name: $('#name').val(),
+      photo: $('#photo').val(),
+      scores: [$('#q0').val(), $('#q1').val(), $('#q2').val(), $('#q3').val(), $('#q4').val(), $('#q5').val(), $('#q6').val(), $('#q7').val()]
+  };
+
+console.log("pageloaded");
+
+  //get the site link
+//    var windowURL = window.location.origin
+    var matchArray = [];
+    var superFriend = 40;
+    var friend = 0;
+//jQuery.post( url [, data ] [, success ] [, dataType ] )
+ //post and get data from the link route API
+$.post("/api/friends", {
+  name: $('#name').val(),
+  photo: $('#photo').val(),
+  scores: [$('#q0').val(), $('#q1').val(), $('#q2').val(), $('#q3').val(), $('#q4').val(), $('#q5').val(), $('#q6').val(), $('#q7').val()]
+}, function() {
+});
+});
+/*$.get("/api/friends", function() {
+///loop through friends in the route
+      for (i = 0; i < data.length - 1; i++) {
+        var matchScore = 0;
+
+      for (x = 0; x < data[i].score.length; j++) {
+          var difference = 0;
+//console.log(data[i].score.length);
+//need the difference between the scores
+        difference = data[i].scores[x] - bestFriend.scores[x];
+        Math.abs(difference)
+
+        matchScore = matchScore + difference;
+//console.log(difference);
+    }
+    matchArray.push(matchArray);
+    console.log(matchArray);
+  }
+  //    for (b = 0; b < matchArray[b]; < bestFriend) {
+  //      if (matchArray[b] < superFriend) {
+  //        superFriend = matchArray[b];
+        }
+      }
+    }
+
+      console.log(superFriend);
+      console.log("Least matches")
+      console.log(matchArray.indexOf(superFriend));
+      friend = matchArray.indexOf(superFriend));
+      console.log(data[bff].name);
+      $('#friendName').append(data[friend].name);
+      $('#friendPhoto').attr('src', data[friend].photo);
+//need index string comparison
+
+});
+  $('superFriendModal').modal("change");
+  return false;
+
+//need the location of the url first!
+//get and post answers first
+
+
+//need to compare friends w the user need values, VALUES!! .val
+//find the difference for each one
+//compare smaller scores and differnces
+//compare user with characters
+//submit answers
+//compare user with the characters scores
+*/
+
+
+
+});
+
+</script>
+
+</html>
