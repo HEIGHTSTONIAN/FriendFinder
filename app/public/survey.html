@@ -45,7 +45,11 @@
         <h4>
             What's your name? (Required)
         </h4>
-
+        <input id="name" type="text" name="FirstName" value="Mickey"><br>
+        <h4>
+            What do you look like? (Required)
+        </h4>
+        <input id="photo" type="text" name="Photo Link" value="http://Mugshothere.jpg"><br>
 
         <h3><strong>First, about ice cream...</strong></h3>
         <h4>You love ice cream.</h4>
@@ -185,7 +189,64 @@
 
 $('document').ready(function() {
   $('#submit').on('click', function() {
+    var scoresList= []
+    //console.log(scores);
+    $.get("/api/friends", "", function(data) {
+      for(var i = 0; i < data.length; i++) {
+        data[i].scores
+        scoresList.push(data[i].scores)
+      }
+      console.log(data[i].scores);
+    });
 console.log('submitclicked');
+console.log(scoresList);
+
+var differences = [];
+
+
+var myScore = [1, 2, 3, 5, 3, 2, 1, 2, 5, 5]
+//console.log(myScore);
+
+//first we need to loop through the big array (scores) holding the individual arrays
+for(i = 0; i < scoresList.length; i++) {
+
+  //setting a variable to collect the differences between the preexisting values and the values we just collected
+  var specificDifference = 0;
+
+    //then we need to loop through individual arrays in scores
+    for(var j = 0; j < scoresList[i].length; j++) {
+      //differences.push(myScore[j]-scores[i][j]);
+      console.log("myScore[j] is " + myScore[j] + " - " + "scores [i][j] is " + scoresList[i][j] + " = " + (myScore[j] - scoresList[i][j]));
+
+      // get the absolute value
+      console.log("our positive difference is " + Math.abs(myScore[j] - scoresList[i][j]))
+
+      //let's add those differences together
+      console.log("SpecificDfference is "+specificDifference + " + what we just got " + Math.abs(myScore[j] - scoresList[i][j]));
+      specificDifference += Math.abs(myScore[j] - scoresList[i][j]);
+      console.log("updated difference is " + specificDifference)
+      console.log("---------------------------")
+
+      //we want to push the difference to our new array "differences" when the for loop we're inside of is on its last instance
+      if (j === (scoresList[i].length - 1)) {
+        differences.push(specificDifference);
+        console.log("push the difference");
+      }
+    }
+  console.log("difference total " + specificDifference);
+  console.log("***************************");
+  console.log("this is the end of an array");
+  console.log("***************************");
+}
+console.log(differences)
+console.log(Math.min(...differences));
+
+
+var lowestNumber = Math.min(...differences);
+console.log(lowestNumber);
+var indexNumberOfOurFriendMatch = differences.indexOf(lowestNumber);
+console.log(indexNumberOfOurFriendMatch);
+
     var newFriend = {
       name: $('#name').val(),
       photo: $('#photo').val(),
@@ -199,67 +260,7 @@ console.log("pageloaded");
     var matchArray = [];
     var superFriend = 40;
     var friend = 0;
-//jQuery.post( url [, data ] [, success ] [, dataType ] )
- //post and get data from the link route API
-$.post("/api/friends", {
-  name: $('#name').val(),
-  photo: $('#photo').val(),
-  scores: [$('#q0').val(), $('#q1').val(), $('#q2').val(), $('#q3').val(), $('#q4').val(), $('#q5').val(), $('#q6').val(), $('#q7').val()]
-}, function() {
-});
-});
-/*$.get("/api/friends", function() {
-///loop through friends in the route
-      for (i = 0; i < data.length - 1; i++) {
-        var matchScore = 0;
-
-      for (x = 0; x < data[i].score.length; j++) {
-          var difference = 0;
-//console.log(data[i].score.length);
-//need the difference between the scores
-        difference = data[i].scores[x] - bestFriend.scores[x];
-        Math.abs(difference)
-
-        matchScore = matchScore + difference;
-//console.log(difference);
-    }
-    matchArray.push(matchArray);
-    console.log(matchArray);
-  }
-  //    for (b = 0; b < matchArray[b]; < bestFriend) {
-  //      if (matchArray[b] < superFriend) {
-  //        superFriend = matchArray[b];
-        }
-      }
-    }
-
-      console.log(superFriend);
-      console.log("Least matches")
-      console.log(matchArray.indexOf(superFriend));
-      friend = matchArray.indexOf(superFriend));
-      console.log(data[bff].name);
-      $('#friendName').append(data[friend].name);
-      $('#friendPhoto').attr('src', data[friend].photo);
-//need index string comparison
-
-});
-  $('superFriendModal').modal("change");
-  return false;
-
-//need the location of the url first!
-//get and post answers first
-
-
-//need to compare friends w the user need values, VALUES!! .val
-//find the difference for each one
-//compare smaller scores and differnces
-//compare user with characters
-//submit answers
-//compare user with the characters scores
-*/
-
-
-
+  })
 });
 
 </script>
