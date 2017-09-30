@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <!-- Modal -->
+    <!-- Modal
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="container">
         <h1>
           Friend Finder survey
@@ -116,7 +116,7 @@
             <option>5</option>
         </select>
         <br>
-         <h3><strong>Sixth, about coffee...</strong></h3>
+        <h3><strong>Sixth, about coffee...</strong></h3>
         <h4>You love enjoying coffee.</h4>
         <p>
             (1 = Totally Disagree, 5 = Totally Agree)
@@ -129,7 +129,7 @@
             <option>5</option>
         </select>
         <br>
-         <h3><strong>Seventh, about new driving...</strong></h3>
+        <h3><strong>Seventh, about new driving...</strong></h3>
         <h4>You love enjoying driving.</h4>
         <p>
             (1 = Totally Disagree, 5 = Totally Agree)
@@ -142,7 +142,7 @@
             <option>5</option>
         </select>
         <br>
-         <h3><strong>Eighth, about surprises...</strong></h3>
+        <h3><strong>Eighth, about surprises...</strong></h3>
         <h4>You love surprises.</h4>
         <p>
             (1 = Totally Disagree, 5 = Totally Agree)
@@ -155,7 +155,7 @@
             <option>5</option>
         </select>
         <br>
-         <h3><strong>Ninth, about Newman...</strong></h3>
+        <h3><strong>Ninth, about Newman...</strong></h3>
         <h4>You love seeing Newman.</h4>
         <p>
             (1 = Totally Disagree, 5 = Totally Agree)
@@ -168,7 +168,7 @@
             <option>5</option>
         </select>
         <br>
-         <h3><strong>Tenth, about dating...</strong></h3>
+        <h3><strong>Tenth, about dating...</strong></h3>
         <h4>You love dating new people.</h4>
         <p>
             (1 = Totally Disagree, 5 = Totally Agree)
@@ -184,85 +184,160 @@
         <hr>
         <button type="button" id='submit' class="btn btn-success btn-medium">Submit</button>
     </div>
+    <!-- The Modal -->
+    <div id="modal">
+      <h1 id="modalText"></h1>
+      <span class="glyphicon glyphicon-remove"></span>
+      <div class="modal-content">
+         <span class="close">&times;</span>
+         <img id='modalImage'></img>
+
+      </div>
+    </div>
 </body>
+<style>
+  #modal {
+    display: none;
+    color: black;
+    border: 5px brown solid;
+    position: absolute;
+    z-index: 99;
+    transform: translate(-50%,50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+    padding: 10px;
+    width: 400px;
+    height: 250px;
+  }
+
+  #modal h1 {
+    font-size: 20px;
+  }
+
+  .glyphicon-remove {
+    position: absolute;
+    font-size: 25px;
+    right: 0px;
+    top: 0px;
+    margin: 10px 10px 0px 0px;
+  }
+
+  .glyphicon:hover {
+    color: red;
+    cursor: pointer;
+  }
+
+  #modal img {
+    margin-left: 25px;
+    width: 50%;
+    height: auto;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+</style>
+
 <script type="text/javascript">
+var differences = [];
+var myScore = [];
+
+var btn = document.getElementById("submit");
+var modal = document.querySelector("#modal");
+var xButton = document.querySelector(".glyphicon-remove");
 
 $('document').ready(function() {
-  $('#submit').on('click', function() {
-    var scoresList= []
-    //console.log(scores);
-    $.get("/api/friends", "", function(data) {
-      for(var i = 0; i < data.length; i++) {
-        data[i].scores
-        scoresList.push(data[i].scores)
-      }
-      console.log(data[i].scores);
+    $('#submit').on('click', function() {
+        var scoresList = [];
+        var namesList = [];
+        var photoList = [];
+
+        //console.log(scores);
+        $.get("/api/friends", "", function(data) {
+            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+                //        data[i].scoresList
+                scoresList.push(data[i].scores);
+                namesList.push(data[i].name);
+                photoList.push(data[i].photo);
+            }
+
+            for (var k = 0; k < 10; k++) {
+                myScore[k] = parseInt(document.getElementById("q" + k).value);
+            }
+            console.log(myScore);
+            //  console.log('submitclicked');
+            //  console.log(scoresList);
+            //  console.log('len='+scoresList.length);
+            //  console.log(myScore.length);
+
+            //first we need to loop through the big array (scores) holding the individual arrays
+            for (i = 0; i < scoresList.length; i++) {
+
+                //setting a variable to collect the differences between the preexisting values and the values we just collected
+                var specificDifference = 0;
+
+                console.log(scoresList[i]);
+                //then we need to loop through individual arrays in scores
+                for (var j = 0; j < scoresList[i].length; j++) {
+                    //differences.push(myScore[j]-scores[i][j]);
+                    //      console.log("myScore[j] is " + myScore[j] + " - " + "scores [i][j] is " + scoresList[i][j] + " = " + (myScore[j] - scoresList[i][j]));
+
+                    // get the absolute value
+                    //      console.log("our positive difference is " + Math.abs(myScore[j] - scoresList[i][j]))
+
+                    //let's add those differences together
+                    //      console.log("SpecificDfference is "+specificDifference + " + what we just got " + Math.abs(myScore[j] - scoresList[i][j]));
+                    specificDifference += Math.abs(myScore[j] - scoresList[i][j]);
+                    //      console.log("updated difference is " + specificDifference)
+                    //      console.log("---------------------------")
+
+                    //we want to push the difference to our new array "differences" when the for loop we're inside of is on its last instance
+                    if (j === (scoresList[i].length - 1)) {
+                        differences.push(specificDifference);
+                        //        console.log("push the difference");
+                    }
+                }
+                //  console.log("difference total " + specificDifference);
+                //  console.log("***************************");
+                //  console.log("this is the end of an array");
+                //  console.log("***************************");
+            }
+            console.log(differences)
+            //console.log(Math.min(...differences));
+
+
+            var lowestNumber = Math.min(...differences);
+            console.log(lowestNumber);
+            var indexNumberOfOurFriendMatch = differences.indexOf(lowestNumber);
+            console.log(indexNumberOfOurFriendMatch);
+            console.log(namesList[indexNumberOfOurFriendMatch]);
+            console.log(photoList[indexNumberOfOurFriendMatch]);
+            console.log("pageloaded");
+            modal.setAttribute("class", "show");
+            document.querySelector("#modalImage").setAttribute("src", photoList[indexNumberOfOurFriendMatch]);
+            document.querySelector("#modalText").innerHTML = namesList[indexNumberOfOurFriendMatch];
+            console.log(modal);
+        });
     });
-console.log('submitclicked');
-console.log(scoresList);
+    // Get the modal
 
-var differences = [];
+    xButton.addEventListener("click", function(e) {
+      modal.setAttribute("class", "hide");
+    });
 
-
-var myScore = [1, 2, 3, 5, 3, 2, 1, 2, 5, 5]
-//console.log(myScore);
-
-//first we need to loop through the big array (scores) holding the individual arrays
-for(i = 0; i < scoresList.length; i++) {
-
-  //setting a variable to collect the differences between the preexisting values and the values we just collected
-  var specificDifference = 0;
-
-    //then we need to loop through individual arrays in scores
-    for(var j = 0; j < scoresList[i].length; j++) {
-      //differences.push(myScore[j]-scores[i][j]);
-      console.log("myScore[j] is " + myScore[j] + " - " + "scores [i][j] is " + scoresList[i][j] + " = " + (myScore[j] - scoresList[i][j]));
-
-      // get the absolute value
-      console.log("our positive difference is " + Math.abs(myScore[j] - scoresList[i][j]))
-
-      //let's add those differences together
-      console.log("SpecificDfference is "+specificDifference + " + what we just got " + Math.abs(myScore[j] - scoresList[i][j]));
-      specificDifference += Math.abs(myScore[j] - scoresList[i][j]);
-      console.log("updated difference is " + specificDifference)
-      console.log("---------------------------")
-
-      //we want to push the difference to our new array "differences" when the for loop we're inside of is on its last instance
-      if (j === (scoresList[i].length - 1)) {
-        differences.push(specificDifference);
-        console.log("push the difference");
-      }
-    }
-  console.log("difference total " + specificDifference);
-  console.log("***************************");
-  console.log("this is the end of an array");
-  console.log("***************************");
-}
-console.log(differences)
-console.log(Math.min(...differences));
+    // When the user clicks on <span> (x), close the modal
 
 
-var lowestNumber = Math.min(...differences);
-console.log(lowestNumber);
-var indexNumberOfOurFriendMatch = differences.indexOf(lowestNumber);
-console.log(indexNumberOfOurFriendMatch);
-
-    var newFriend = {
-      name: $('#name').val(),
-      photo: $('#photo').val(),
-      scores: [$('#q0').val(), $('#q1').val(), $('#q2').val(), $('#q3').val(), $('#q4').val(), $('#q5').val(), $('#q6').val(), $('#q7').val()]
-  };
-
-console.log("pageloaded");
-
-  //get the site link
-//    var windowURL = window.location.origin
-    var matchArray = [];
-    var superFriend = 40;
-    var friend = 0;
-  })
+    // When the user clicks anywhere outside of the modal, close it
 });
-
 </script>
 
 </html>
